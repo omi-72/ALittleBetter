@@ -42,12 +42,24 @@ fun HomeScreen(
     onGrowthClick: () -> Unit,
     onLetItGoClick: () -> Unit,
     onMemoriesClick: () -> Unit,
+    onProfileClick: () -> Unit,
 ) {
     val timeOfDay = rememberCurrentTimeOfDay()
     val ink by animateColorAsState(AppColors.paletteFor(timeOfDay).ink, animationSpec = tween(3000), label = "inkColor")
     val quote = remember { dailyQuoteFor(currentLocalDateTime().date.dayOfYear) }
 
     AnimatedSky(timeOfDay = timeOfDay) {
+        Text(
+            text = "👤",
+            fontSize = 20.sp,
+            color = ink,
+            modifier = Modifier
+                .align(Alignment.TopEnd)
+                .safeContentPadding()
+                .padding(horizontal = 24.dp, vertical = 16.dp)
+                .clickable(onClick = onProfileClick),
+        )
+
         Column(
             modifier = Modifier
                 .safeContentPadding()

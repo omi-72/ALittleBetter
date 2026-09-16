@@ -10,6 +10,7 @@ import org.example.alittlebetter.presentation.goodthing.OneGoodThingViewModel
 import org.example.alittlebetter.presentation.growth.GrowthViewModel
 import org.example.alittlebetter.presentation.littlestep.LittleStepViewModel
 import org.example.alittlebetter.presentation.memories.MemoriesViewModel
+import org.example.alittlebetter.presentation.profile.ProfileViewModel
 import org.koin.core.context.startKoin
 import org.koin.core.module.dsl.viewModel
 import org.koin.dsl.KoinAppDeclaration
@@ -23,6 +24,7 @@ val appModule = module {
     viewModel { OneGoodThingViewModel(get()) }
     viewModel { GrowthViewModel(get()) }
     viewModel { MemoriesViewModel(get(), get()) }
+    viewModel { ProfileViewModel(get(), get()) }
 }
 
 fun initKoin(config: KoinAppDeclaration = {}) {
