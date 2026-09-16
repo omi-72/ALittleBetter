@@ -8,10 +8,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.isActive
-import kotlinx.datetime.TimeZone
-import kotlinx.datetime.toLocalDateTime
-import kotlin.time.Clock
-import kotlin.time.ExperimentalTime
+import org.example.alittlebetter.core.time.currentLocalDateTime
 
 enum class TimeOfDay { MORNING, AFTERNOON, EVENING, NIGHT }
 
@@ -22,11 +19,7 @@ fun timeOfDayForHour(hour: Int): TimeOfDay = when (hour) {
     else -> TimeOfDay.NIGHT
 }
 
-@OptIn(ExperimentalTime::class)
-private fun currentTimeOfDay(): TimeOfDay {
-    val hour = Clock.System.now().toLocalDateTime(TimeZone.currentSystemDefault()).hour
-    return timeOfDayForHour(hour)
-}
+private fun currentTimeOfDay(): TimeOfDay = timeOfDayForHour(currentLocalDateTime().hour)
 
 @Composable
 fun rememberCurrentTimeOfDay(pollIntervalMillis: Long = 60_000L): TimeOfDay {
