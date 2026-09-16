@@ -13,6 +13,7 @@ import org.example.alittlebetter.presentation.letitgo.LetItGoScreen
 import org.example.alittlebetter.presentation.littlestep.LittleStepScreen
 import org.example.alittlebetter.presentation.memories.MemoriesScreen
 import org.example.alittlebetter.presentation.nightreflection.NightReflectionScreen
+import org.example.alittlebetter.presentation.peacespace.PeaceSpaceScreen
 import org.example.alittlebetter.presentation.profile.ProfileScreen
 
 private sealed interface Destination {
@@ -25,6 +26,7 @@ private sealed interface Destination {
     data object Memories : Destination
     data object Profile : Destination
     data object NightReflection : Destination
+    data object PeaceSpace : Destination
 }
 
 /** Hand-rolled screen switcher - a real nav library isn't worth it yet for this few screens. */
@@ -53,7 +55,9 @@ fun AppRoot() {
         Destination.Profile -> ProfileScreen(
             onBack = { destination = Destination.Home },
             onNightReflectionClick = { destination = Destination.NightReflection },
+            onPeaceSpaceClick = { destination = Destination.PeaceSpace },
         )
         Destination.NightReflection -> NightReflectionScreen(onBack = { destination = Destination.Home })
+        Destination.PeaceSpace -> PeaceSpaceScreen(onBack = { destination = Destination.Home })
     }
 }

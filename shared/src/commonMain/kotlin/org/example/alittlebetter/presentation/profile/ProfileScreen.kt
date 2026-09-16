@@ -3,7 +3,9 @@ package org.example.alittlebetter.presentation.profile
 import androidx.compose.animation.animateColorAsState
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -29,6 +31,7 @@ import org.koin.compose.viewmodel.koinViewModel
 fun ProfileScreen(
     onBack: () -> Unit,
     onNightReflectionClick: () -> Unit,
+    onPeaceSpaceClick: () -> Unit,
     viewModel: ProfileViewModel = koinViewModel(),
 ) {
     val timeOfDay = rememberCurrentTimeOfDay()
@@ -85,12 +88,22 @@ fun ProfileScreen(
 
             Spacer(modifier = Modifier.height(40.dp))
 
-            Text(
-                text = "🌙 Night Reflection",
-                fontSize = 13.sp,
-                color = ink.copy(alpha = 0.7f),
-                modifier = Modifier.clickable(onClick = onNightReflectionClick).padding(vertical = 4.dp),
-            )
+            Row(
+                horizontalArrangement = Arrangement.spacedBy(24.dp),
+            ) {
+                Text(
+                    text = "🌙 Night Reflection",
+                    fontSize = 13.sp,
+                    color = ink.copy(alpha = 0.7f),
+                    modifier = Modifier.clickable(onClick = onNightReflectionClick).padding(vertical = 4.dp),
+                )
+                Text(
+                    text = "🍃 Peace Space",
+                    fontSize = 13.sp,
+                    color = ink.copy(alpha = 0.7f),
+                    modifier = Modifier.clickable(onClick = onPeaceSpaceClick).padding(vertical = 4.dp),
+                )
+            }
         }
     }
 }
