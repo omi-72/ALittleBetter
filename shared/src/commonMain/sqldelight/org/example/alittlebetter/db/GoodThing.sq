@@ -1,0 +1,11 @@
+CREATE TABLE goodThing (
+    id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    date TEXT NOT NULL,
+    text TEXT NOT NULL
+);
+
+insertGoodThing:
+INSERT INTO goodThing(date, text) VALUES (?, ?);
+
+selectAll:
+SELECT * FROM goodThing ORDER BY id ASC;

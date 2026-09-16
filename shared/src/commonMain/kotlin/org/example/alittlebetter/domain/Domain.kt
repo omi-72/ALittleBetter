@@ -19,3 +19,11 @@ fun dailyQuoteFor(dayOfYear: Int): String = dailyQuotes[dayOfYear % dailyQuotes.
 interface StepCompletionRepository {
     suspend fun recordCompletion(date: LocalDate)
 }
+
+/** Named "Entry" (not "GoodThing") to avoid colliding with SQLDelight's generated row class of that name. */
+data class GoodThingEntry(val date: LocalDate, val text: String)
+
+interface GoodThingRepository {
+    suspend fun addGoodThing(text: String)
+    suspend fun getAllGoodThings(): List<GoodThingEntry>
+}

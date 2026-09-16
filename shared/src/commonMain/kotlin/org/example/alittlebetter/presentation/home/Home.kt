@@ -35,7 +35,7 @@ import org.example.alittlebetter.core.time.currentLocalDateTime
 import org.example.alittlebetter.domain.dailyQuoteFor
 
 @Composable
-fun HomeScreen(onLittleStepClick: () -> Unit) {
+fun HomeScreen(onLittleStepClick: () -> Unit, onGoodThingClick: () -> Unit) {
     val timeOfDay = rememberCurrentTimeOfDay()
     val ink by animateColorAsState(AppColors.paletteFor(timeOfDay).ink, animationSpec = tween(3000), label = "inkColor")
     val quote = remember { dailyQuoteFor(currentLocalDateTime().date.dayOfYear) }
@@ -76,7 +76,7 @@ fun HomeScreen(onLittleStepClick: () -> Unit) {
 
             Spacer(modifier = Modifier.weight(0.4f))
 
-            GoodThingTeaser(ink = ink)
+            GoodThingTeaser(ink = ink, modifier = Modifier.clickable(onClick = onGoodThingClick))
 
             Spacer(modifier = Modifier.weight(0.6f))
         }
