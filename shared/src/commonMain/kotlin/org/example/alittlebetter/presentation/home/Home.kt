@@ -33,7 +33,8 @@ import org.example.alittlebetter.core.animation.TimeOfDay
 import org.example.alittlebetter.core.animation.rememberCurrentTimeOfDay
 import org.example.alittlebetter.core.designsystem.AppColors
 import org.example.alittlebetter.core.time.currentLocalDateTime
-import org.example.alittlebetter.domain.dailyQuoteFor
+import org.example.alittlebetter.domain.ThoughtCategory
+import org.example.alittlebetter.domain.dailyThoughtFor
 
 @Composable
 fun HomeScreen(
@@ -43,10 +44,11 @@ fun HomeScreen(
     onLetItGoClick: () -> Unit,
     onMemoriesClick: () -> Unit,
     onProfileClick: () -> Unit,
+    onDailyThoughtClick: (ThoughtCategory) -> Unit,
 ) {
     val timeOfDay = rememberCurrentTimeOfDay()
     val ink by animateColorAsState(AppColors.paletteFor(timeOfDay).ink, animationSpec = tween(3000), label = "inkColor")
-    val quote = remember { dailyQuoteFor(currentLocalDateTime().date.dayOfYear) }
+    val todayThought = remember { dailyThoughtFor(currentLocalDateTime().date.dayOfYear) }
 
     AnimatedSky(timeOfDay = timeOfDay) {
         Text(
@@ -78,11 +80,12 @@ fun HomeScreen(
             Spacer(modifier = Modifier.weight(0.3f))
 
             Text(
-                text = quote,
+                text = todayThought.text,
                 fontSize = 16.sp,
                 fontStyle = FontStyle.Italic,
                 textAlign = TextAlign.Center,
                 color = ink,
+                modifier = Modifier.clickable(onClick = { onDailyThoughtClick(todayThought.category) }),
             )
 
             Spacer(modifier = Modifier.weight(1f))

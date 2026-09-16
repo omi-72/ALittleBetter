@@ -5,6 +5,8 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import org.example.alittlebetter.domain.ThoughtCategory
+import org.example.alittlebetter.presentation.dailythought.DailyThoughtScreen
 import org.example.alittlebetter.presentation.goodthing.MyGardenScreen
 import org.example.alittlebetter.presentation.goodthing.OneGoodThingScreen
 import org.example.alittlebetter.presentation.growth.GrowthScreen
@@ -27,6 +29,7 @@ private sealed interface Destination {
     data object Profile : Destination
     data object NightReflection : Destination
     data object PeaceSpace : Destination
+    data class DailyThought(val category: ThoughtCategory) : Destination
 }
 
 /** Hand-rolled screen switcher - a real nav library isn't worth it yet for this few screens. */
@@ -34,7 +37,7 @@ private sealed interface Destination {
 fun AppRoot() {
     var destination by remember { mutableStateOf<Destination>(Destination.Home) }
 
-    when (destination) {
+    when (val dest = destination) {
         Destination.Home -> HomeScreen(
             onLittleStepClick = { destination = Destination.LittleStep },
             onGoodThingClick = { destination = Destination.OneGoodThing },
@@ -42,6 +45,7 @@ fun AppRoot() {
             onLetItGoClick = { destination = Destination.LetItGo },
             onMemoriesClick = { destination = Destination.Memories },
             onProfileClick = { destination = Destination.Profile },
+            onDailyThoughtClick = { category -> destination = Destination.DailyThought(category) },
         )
         Destination.LittleStep -> LittleStepScreen(onBack = { destination = Destination.Home })
         Destination.OneGoodThing -> OneGoodThingScreen(
@@ -59,5 +63,9 @@ fun AppRoot() {
         )
         Destination.NightReflection -> NightReflectionScreen(onBack = { destination = Destination.Home })
         Destination.PeaceSpace -> PeaceSpaceScreen(onBack = { destination = Destination.Home })
+        is Destination.DailyThought -> DailyThoughtScreen(
+            initialCategory = dest.category,
+            onBack = { destination = Destination.Home },
+        )
     }
 }
