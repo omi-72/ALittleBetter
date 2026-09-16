@@ -1,0 +1,9 @@
+CREATE TABLE stepCompletion (
+    date TEXT NOT NULL PRIMARY KEY
+);
+
+insertCompletion:
+INSERT OR IGNORE INTO stepCompletion(date) VALUES (?);
+
+selectAll:
+SELECT * FROM stepCompletion;

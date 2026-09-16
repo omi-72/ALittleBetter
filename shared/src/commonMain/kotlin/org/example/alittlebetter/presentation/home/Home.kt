@@ -5,6 +5,7 @@ package org.example.alittlebetter.presentation.home
 import androidx.compose.animation.animateColorAsState
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -34,7 +35,7 @@ import org.example.alittlebetter.core.time.currentLocalDateTime
 import org.example.alittlebetter.domain.dailyQuoteFor
 
 @Composable
-fun HomeScreen() {
+fun HomeScreen(onLittleStepClick: () -> Unit) {
     val timeOfDay = rememberCurrentTimeOfDay()
     val ink by animateColorAsState(AppColors.paletteFor(timeOfDay).ink, animationSpec = tween(3000), label = "inkColor")
     val quote = remember { dailyQuoteFor(currentLocalDateTime().date.dayOfYear) }
@@ -70,6 +71,7 @@ fun HomeScreen() {
             LittleStepCard(
                 title = "🌱 Today's Little Step",
                 body = "Take 10 minutes for yourself.",
+                modifier = Modifier.clickable(onClick = onLittleStepClick),
             )
 
             Spacer(modifier = Modifier.weight(0.4f))

@@ -1,5 +1,7 @@
 package org.example.alittlebetter.domain
 
+import kotlinx.datetime.LocalDate
+
 // Phase 3+: models and use cases, independent of Compose and SQLDelight.
 
 private val dailyQuotes = listOf(
@@ -13,3 +15,7 @@ private val dailyQuotes = listOf(
 )
 
 fun dailyQuoteFor(dayOfYear: Int): String = dailyQuotes[dayOfYear % dailyQuotes.size]
+
+interface StepCompletionRepository {
+    suspend fun recordCompletion(date: LocalDate)
+}
