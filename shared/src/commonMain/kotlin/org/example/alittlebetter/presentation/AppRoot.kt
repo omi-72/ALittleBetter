@@ -9,6 +9,7 @@ import org.example.alittlebetter.presentation.goodthing.MyGardenScreen
 import org.example.alittlebetter.presentation.goodthing.OneGoodThingScreen
 import org.example.alittlebetter.presentation.growth.GrowthScreen
 import org.example.alittlebetter.presentation.home.HomeScreen
+import org.example.alittlebetter.presentation.letitgo.LetItGoScreen
 import org.example.alittlebetter.presentation.littlestep.LittleStepScreen
 
 private sealed interface Destination {
@@ -17,6 +18,7 @@ private sealed interface Destination {
     data object OneGoodThing : Destination
     data object Garden : Destination
     data object Growth : Destination
+    data object LetItGo : Destination
 }
 
 /** Hand-rolled screen switcher - a real nav library isn't worth it yet for this few screens. */
@@ -29,6 +31,7 @@ fun AppRoot() {
             onLittleStepClick = { destination = Destination.LittleStep },
             onGoodThingClick = { destination = Destination.OneGoodThing },
             onGrowthClick = { destination = Destination.Growth },
+            onLetItGoClick = { destination = Destination.LetItGo },
         )
         Destination.LittleStep -> LittleStepScreen(onBack = { destination = Destination.Home })
         Destination.OneGoodThing -> OneGoodThingScreen(
@@ -37,5 +40,6 @@ fun AppRoot() {
         )
         Destination.Garden -> MyGardenScreen(onBack = { destination = Destination.Home })
         Destination.Growth -> GrowthScreen(onBack = { destination = Destination.Home })
+        Destination.LetItGo -> LetItGoScreen(onBack = { destination = Destination.Home })
     }
 }
