@@ -29,3 +29,13 @@ interface GoodThingRepository {
     suspend fun addGoodThing(text: String)
     suspend fun getAllGoodThings(): List<GoodThingEntry>
 }
+
+val nightReflectionQuestions = listOf(
+    "What's one thing that went well today?",
+    "What's something you're grateful for right now?",
+    "Is there anything you'd like to let go of before you sleep?",
+)
+
+interface NightReflectionRepository {
+    suspend fun saveAnswer(date: LocalDate, question: String, answer: String)
+}

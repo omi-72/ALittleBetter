@@ -9,6 +9,7 @@ import org.example.alittlebetter.core.time.currentLocalDate
 import org.example.alittlebetter.db.AppDatabase
 import org.example.alittlebetter.domain.GoodThingEntry
 import org.example.alittlebetter.domain.GoodThingRepository
+import org.example.alittlebetter.domain.NightReflectionRepository
 import org.example.alittlebetter.domain.StepCompletionRepository
 
 class SqlStepCompletionRepository(private val database: AppDatabase) : StepCompletionRepository {
@@ -43,6 +44,14 @@ class SqlGoodThingRepository(private val database: AppDatabase) : GoodThingRepos
             database.goodThingQueries.selectAll().executeAsList().map { row ->
                 GoodThingEntry(date = LocalDate.parse(row.date), text = row.text)
             }
+        }
+    }
+}
+
+class SqlNightReflectionRepository(private val database: AppDatabase) : NightReflectionRepository {
+    override suspend fun saveAnswer(date: LocalDate, question: String, answer: String) {
+        withContext(Dispatchers.Default) {
+            database.nightReflectionQueries.insertAnswer(date.toString(), question, answer)
         }
     }
 }

@@ -26,7 +26,11 @@ import org.example.alittlebetter.core.designsystem.AppColors
 import org.koin.compose.viewmodel.koinViewModel
 
 @Composable
-fun ProfileScreen(onBack: () -> Unit, viewModel: ProfileViewModel = koinViewModel()) {
+fun ProfileScreen(
+    onBack: () -> Unit,
+    onNightReflectionClick: () -> Unit,
+    viewModel: ProfileViewModel = koinViewModel(),
+) {
     val timeOfDay = rememberCurrentTimeOfDay()
     val ink by animateColorAsState(AppColors.paletteFor(timeOfDay).ink, animationSpec = tween(3000), label = "inkColor")
     val state by viewModel.state.collectAsState()
@@ -77,6 +81,15 @@ fun ProfileScreen(onBack: () -> Unit, viewModel: ProfileViewModel = koinViewMode
                 fontSize = 14.sp,
                 color = ink.copy(alpha = 0.8f),
                 textAlign = TextAlign.Center,
+            )
+
+            Spacer(modifier = Modifier.height(40.dp))
+
+            Text(
+                text = "🌙 Night Reflection",
+                fontSize = 13.sp,
+                color = ink.copy(alpha = 0.7f),
+                modifier = Modifier.clickable(onClick = onNightReflectionClick).padding(vertical = 4.dp),
             )
         }
     }
