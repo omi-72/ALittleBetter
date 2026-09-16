@@ -8,6 +8,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -40,6 +41,7 @@ fun HomeScreen(
     onGoodThingClick: () -> Unit,
     onGrowthClick: () -> Unit,
     onLetItGoClick: () -> Unit,
+    onMemoriesClick: () -> Unit,
 ) {
     val timeOfDay = rememberCurrentTimeOfDay()
     val ink by animateColorAsState(AppColors.paletteFor(timeOfDay).ink, animationSpec = tween(3000), label = "inkColor")
@@ -89,12 +91,23 @@ fun HomeScreen(
 
             Spacer(modifier = Modifier.weight(0.4f))
 
-            Text(
-                text = "🕊️ Let it go",
-                fontSize = 13.sp,
-                color = ink.copy(alpha = 0.7f),
-                modifier = Modifier.clickable(onClick = onLetItGoClick).padding(vertical = 4.dp),
-            )
+            Row(
+                horizontalArrangement = Arrangement.spacedBy(24.dp),
+                modifier = Modifier.padding(vertical = 4.dp),
+            ) {
+                Text(
+                    text = "🕊️ Let it go",
+                    fontSize = 13.sp,
+                    color = ink.copy(alpha = 0.7f),
+                    modifier = Modifier.clickable(onClick = onLetItGoClick),
+                )
+                Text(
+                    text = "📅 Memories",
+                    fontSize = 13.sp,
+                    color = ink.copy(alpha = 0.7f),
+                    modifier = Modifier.clickable(onClick = onMemoriesClick),
+                )
+            }
 
             Spacer(modifier = Modifier.weight(0.4f))
         }

@@ -23,6 +23,12 @@ class SqlStepCompletionRepository(private val database: AppDatabase) : StepCompl
             database.stepCompletionQueries.countAll().executeAsOne().toInt()
         }
     }
+
+    override suspend fun getCompletedDates(): List<LocalDate> {
+        return withContext(Dispatchers.Default) {
+            database.stepCompletionQueries.selectAll().executeAsList().map { LocalDate.parse(it) }
+        }
+    }
 }
 
 class SqlGoodThingRepository(private val database: AppDatabase) : GoodThingRepository {
