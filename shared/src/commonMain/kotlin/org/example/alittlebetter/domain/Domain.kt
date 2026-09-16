@@ -18,6 +18,7 @@ fun dailyQuoteFor(dayOfYear: Int): String = dailyQuotes[dayOfYear % dailyQuotes.
 
 interface StepCompletionRepository {
     suspend fun recordCompletion(date: LocalDate)
+    suspend fun countCompletedDays(): Int
 }
 
 /** Named "Entry" (not "GoodThing") to avoid colliding with SQLDelight's generated row class of that name. */

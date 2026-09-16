@@ -35,7 +35,7 @@ import org.example.alittlebetter.core.time.currentLocalDateTime
 import org.example.alittlebetter.domain.dailyQuoteFor
 
 @Composable
-fun HomeScreen(onLittleStepClick: () -> Unit, onGoodThingClick: () -> Unit) {
+fun HomeScreen(onLittleStepClick: () -> Unit, onGoodThingClick: () -> Unit, onGrowthClick: () -> Unit) {
     val timeOfDay = rememberCurrentTimeOfDay()
     val ink by animateColorAsState(AppColors.paletteFor(timeOfDay).ink, animationSpec = tween(3000), label = "inkColor")
     val quote = remember { dailyQuoteFor(currentLocalDateTime().date.dayOfYear) }
@@ -78,6 +78,10 @@ fun HomeScreen(onLittleStepClick: () -> Unit, onGoodThingClick: () -> Unit) {
 
             GoodThingTeaser(ink = ink, modifier = Modifier.clickable(onClick = onGoodThingClick))
 
+            Spacer(modifier = Modifier.weight(0.3f))
+
+            GrowthTeaser(ink = ink, modifier = Modifier.clickable(onClick = onGrowthClick))
+
             Spacer(modifier = Modifier.weight(0.6f))
         }
     }
@@ -115,5 +119,17 @@ private fun GoodThingTeaser(ink: Color, modifier: Modifier = Modifier) {
     ) {
         Text(text = "✨ One Good Thing", fontSize = 14.sp, fontWeight = FontWeight.Medium, color = ink)
         Text(text = "What made you smile?", fontSize = 13.sp, color = ink.copy(alpha = 0.75f))
+    }
+}
+
+@Composable
+private fun GrowthTeaser(ink: Color, modifier: Modifier = Modifier) {
+    Column(
+        modifier = modifier.fillMaxWidth(),
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.spacedBy(4.dp),
+    ) {
+        Text(text = "🌱 My Growth", fontSize = 14.sp, fontWeight = FontWeight.Medium, color = ink)
+        Text(text = "See how far you've come.", fontSize = 13.sp, color = ink.copy(alpha = 0.75f))
     }
 }

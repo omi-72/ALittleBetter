@@ -17,6 +17,12 @@ class SqlStepCompletionRepository(private val database: AppDatabase) : StepCompl
             database.stepCompletionQueries.insertCompletion(date.toString())
         }
     }
+
+    override suspend fun countCompletedDays(): Int {
+        return withContext(Dispatchers.Default) {
+            database.stepCompletionQueries.countAll().executeAsOne().toInt()
+        }
+    }
 }
 
 class SqlGoodThingRepository(private val database: AppDatabase) : GoodThingRepository {

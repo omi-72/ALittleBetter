@@ -14,17 +14,21 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.sp
 
-enum class GrowthStage(val emoji: String, val minDays: Int) {
-    SEED("🌱", 0),
-    SPROUT("🌿", 7),
-    BLOSSOM("🌸", 14),
-    TREE("🌳", 30),
-    RADIANT_TREE("🌳✨", 60),
-    HOME_TREE("🌳🏡", 100),
+enum class GrowthStage(val emoji: String, val minDays: Int, val label: String, val message: String) {
+    SEED("🌱", 0, "Seed", "Every journey starts with a single seed."),
+    SPROUT("🌿", 7, "Sprout", "You're growing, little by little."),
+    BLOSSOM("🌸", 14, "Blossom", "Look how far you've come."),
+    TREE("🌳", 30, "Tree", "You've grown into something strong."),
+    RADIANT_TREE("🌳✨", 60, "Radiant Tree", "Your growth is starting to radiate outward."),
+    HOME_TREE("🌳🏡", 100, "Home Tree", "This tree is home now."),
 }
 
 fun growthStageFor(daysCompleted: Int): GrowthStage =
     GrowthStage.entries.lastOrNull { daysCompleted >= it.minDays } ?: GrowthStage.SEED
+
+/** The next stage still ahead of [daysCompleted], or null once every stage has been reached. */
+fun nextGrowthStage(daysCompleted: Int): GrowthStage? =
+    GrowthStage.entries.firstOrNull { daysCompleted < it.minDays }
 
 /** Renders the growth-stage emoji for [daysCompleted], animating in when the stage changes. */
 @Composable

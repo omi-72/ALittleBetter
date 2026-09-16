@@ -7,3 +7,6 @@ INSERT OR IGNORE INTO stepCompletion(date) VALUES (?);
 
 selectAll:
 SELECT * FROM stepCompletion;
+
+countAll:
+SELECT COUNT(*) FROM stepCompletion;

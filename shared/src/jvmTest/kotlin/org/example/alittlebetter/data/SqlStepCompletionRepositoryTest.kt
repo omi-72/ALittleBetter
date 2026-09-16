@@ -37,4 +37,21 @@ class SqlStepCompletionRepositoryTest {
 
         assertEquals(1, database.stepCompletionQueries.selectAll().executeAsList().size)
     }
+
+    @Test
+    fun countCompletedDays_countsDistinctDates() {
+        val driver = JdbcSqliteDriver(JdbcSqliteDriver.IN_MEMORY)
+        AppDatabase.Schema.create(driver)
+        val database = AppDatabase(driver)
+        val repository = SqlStepCompletionRepository(database)
+
+        runBlocking {
+            repository.recordCompletion(LocalDate(2026, 9, 14))
+            repository.recordCompletion(LocalDate(2026, 9, 15))
+            repository.recordCompletion(LocalDate(2026, 9, 15))
+        }
+
+        val count = runBlocking { repository.countCompletedDays() }
+        assertEquals(2, count)
+    }
 }
