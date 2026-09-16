@@ -6,7 +6,12 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		8F55FA253DF58D51A84DA471 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 476C9586ED9B6865CED95EC1 /* libsqlite3.dylib */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXFileReference section */
+		476C9586ED9B6865CED95EC1 /* libsqlite3.dylib */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
 		A03AFC452C12CABEF15736AC /* ALittleBetter.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ALittleBetter.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -41,6 +46,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8F55FA253DF58D51A84DA471 /* libsqlite3.dylib in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -53,7 +59,16 @@
 				61F2819867AA6D1A73EC8118 /* Configuration */,
 				30885B45CD05B87DE88A46FC /* iosApp */,
 				D35AB81266BE00EFF9672B0A /* Products */,
+				A76DF8CB86CF248A14674A5E /* Frameworks */,
 			);
+			sourceTree = "<group>";
+		};
+		A76DF8CB86CF248A14674A5E /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				476C9586ED9B6865CED95EC1 /* libsqlite3.dylib */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		D35AB81266BE00EFF9672B0A /* Products */ = {
@@ -84,8 +99,6 @@
 				30885B45CD05B87DE88A46FC /* iosApp */,
 			);
 			name = iosApp;
-			packageProductDependencies = (
-			);
 			productName = iosApp;
 			productReference = A03AFC452C12CABEF15736AC /* ALittleBetter.app */;
 			productType = "com.apple.product-type.application";
